@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "436193261935",
+    "firebase_url": "https://sepsisdetector.firebaseio.com",
+    "project_id": "sepsisdetector",
+    "storage_bucket": "sepsisdetector.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:436193261935:android:31cf4d44203ff9c225109a",
+        "android_client_info": {
+          "package_name": "com.example.sepsisdetector"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "436193261935-vc1bi6eln66ese7nu0rtamel7ghgfc3v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sepsisdetector",
+            "certificate_hash": "1d2c2f1d58be0b4f494fef8ac01fb885e80bf41f"
+          }
+        },
+        {
+          "client_id": "436193261935-5qs12ukkkbetsa765ni8u3a54phr31l1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABeHSfrcjsxdSeYDkicw0TsVpy_WmHbAA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "436193261935-5qs12ukkkbetsa765ni8u3a54phr31l1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

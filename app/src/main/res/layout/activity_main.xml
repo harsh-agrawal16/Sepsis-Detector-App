@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#9FE5EE"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="217dp"
+            android:layout_height="106dp"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentBottom="false"
+            android:layout_centerInParent="false"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/gehealth" />
+
+        <EditText
+            android:id="@+id/patientIdEditText"
+            android:layout_width="293dp"
+            android:layout_height="60dp"
+            android:layout_alignBottom="@id/imageView"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="-67dp"
+            android:ems="10"
+            android:hint="Patient Email"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="293dp"
+            android:layout_height="60dp"
+            android:layout_alignBottom="@id/patientIdEditText"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="-67dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/passwordEditText"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="-67dp"
+            android:backgroundTint="#03A9F4"
+            android:text="Login" />
+
+        <TextView
+            android:id="@+id/signUpTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/loginButton"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="-28dp"
+            android:text="New User? Sign up."
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
