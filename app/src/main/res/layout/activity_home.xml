@@ -4,17 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#A0D7F0"
     tools:context=".HomeActivity">
 
     <Button
-        android:id="@+id/logoutButton"
+        android:id="@+id/enterButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="170dp"
-        android:layout_marginTop="333dp"
+        android:layout_marginTop="356dp"
         android:layout_marginEnd="153dp"
-        android:text="Logout"
+        android:text="Enter"
+        android:background="#ACE1E7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="169dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="183dp"
+        android:text="Patient Details"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+        android:id="@+id/heartbeatEditText"
+        android:layout_width="336dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="103dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="95dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Enter Heartbeat of the patient."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <EditText
+            android:id="@+id/breathRateEditText"
+            android:layout_width="336dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="103dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="95dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Enter Breath Rate of the patient."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/heartbeatEditText" />
+
+        <EditText
+            android:id="@+id/tempEditText"
+            android:layout_width="336dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="103dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="95dp"
+            android:ems="10"
+            android:hint="Enter Temp of the patient"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/breathRateEditText" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,4 +4,6 @@
     <item android:title="Practice" android:id="@+id/practice"></item>
     <item android:title="About" android:id="@+id/about"></item>
     <item android:title="Symptoms" android:id="@+id/symptoms"></item>
+    <item android:title="Logout" android:id="@+id/logout"></item>
+
 </menu>
