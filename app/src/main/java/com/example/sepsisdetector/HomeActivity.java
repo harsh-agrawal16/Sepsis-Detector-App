@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,6 +23,13 @@ public class HomeActivity extends AppCompatActivity {
     EditText tempEditText;
     EditText breathRateEditText;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+
+    public void sendEmail(){
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "agrwl.harsh16@gmail.com"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Critical Situation of Patient");
+        intent.putExtra(Intent.EXTRA_TEXT, "Please attend the patient soon.");
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,7 +82,7 @@ public class HomeActivity extends AppCompatActivity {
                 Integer breathRate =  Integer.parseInt(breathRateEditText.getText().toString());
 
                 if(temp > 101 || heartbeat >90 || breathRate > 20){
-
+                    sendEmail();
                 }
             }
         });
