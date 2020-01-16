@@ -29,5 +29,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
     implementation 'com.google.firebase:firebase-auth:19.2.0'
+    //added this dependency to fix the app crashing issue.
     implementation 'com.google.firebase:firebase-core:16.0.9'
+
 }
