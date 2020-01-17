@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseUser mFireBaseUser = mFirebaseAuth.getCurrentUser();
                 if (mFireBaseUser != null) {
                     Toast.makeText(MainActivity.this, "You Are Logged in!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                    startActivity(new Intent(MainActivity.this, patientListActivity.class));
                 } else {
                     Toast.makeText(MainActivity.this, "Please Login!", Toast.LENGTH_SHORT).show();
                 }

@@ -4,34 +4,26 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HomeActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
-    Button enterButton;
-    TextView patienttextView;
+public class patientListActivity extends AppCompatActivity {
+
+    ArrayList<String> patients ;
+    ListView patientsListView ;
     FirebaseAuth mFirebaseAuth;
-    EditText heartbeatEditText;
-    EditText tempEditText;
-    EditText breathRateEditText;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-
-    public void sendEmail(){
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "agrwl.harsh16@gmail.com"));
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Critical Situation of Patient");
-        intent.putExtra(Intent.EXTRA_TEXT, "Please attend the patient soon.");
-        startActivity(intent);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -59,7 +51,7 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             case R.id.logout:
                 mFirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(HomeActivity.this, MainActivity.class));
+                startActivity(new Intent(patientListActivity.this, MainActivity.class));
             default:
                 return false;
         }
@@ -69,31 +61,31 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_patient_list);
 
-        patienttextView = findViewById(R.id.textView);
-        Intent intent = getIntent();
-        String patientId = intent.getStringExtra("PatientId");
-        patienttextView.setText(patientId + " Details");
+        patientsListView = findViewById(R.id.patientsListView);
+        patients = new ArrayList<>();
+        patients.add("ADD A NEW PATIENT.");
+        patients.add("Patient 1");
+        patients.add("Patient 2");
+        patients.add("Patient 3");
+        patients.add("Patient 4");
+        patients.add("Patient 5");
+        patients.add("Patient 6");
 
+        ArrayAdapter arrayAdapter = new ArrayAdapter(patientListActivity.this, android.R.layout.simple_list_item_1,patients);
+        patientsListView.setAdapter(arrayAdapter);
 
-        heartbeatEditText = findViewById(R.id.heartbeatEditText);
-        tempEditText = findViewById(R.id.tempEditText);
-        breathRateEditText = findViewById(R.id.breathRateEditText);
-        enterButton = findViewById(R.id.enterButton);
-        enterButton.setOnClickListener(new View.OnClickListener() {
+        patientsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Integer temp = Integer.parseInt(tempEditText.getText().toString());
-                Integer heartbeat = Integer.parseInt(heartbeatEditText.getText().toString());
-                Integer breathRate =  Integer.parseInt(breathRateEditText.getText().toString());
-
-                if(temp > 101 || heartbeat >90 || breathRate > 20){
-                    sendEmail();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position!=0){
+                    Intent intent = new Intent(patientListActivity.this,HomeActivity.class);
+                    intent.putExtra("PatientId", patients.get(position));
+                    startActivity(intent);
                 }
             }
         });
 
-
-       }
+    }
 }

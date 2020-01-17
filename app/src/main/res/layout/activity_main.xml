@@ -35,7 +35,7 @@
             android:layout_centerInParent="true"
             android:layout_marginBottom="-67dp"
             android:ems="10"
-            android:hint="Patient Email"
+            android:hint="Email"
             android:inputType="textEmailAddress" />
 
         <EditText
