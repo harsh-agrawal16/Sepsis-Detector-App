@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class signUpActivity extends AppCompatActivity {
 
+
     EditText patientidEditText;
     EditText passwordEditText;
     Button signUpButton;

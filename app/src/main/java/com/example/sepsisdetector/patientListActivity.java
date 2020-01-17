@@ -83,6 +83,8 @@ public class patientListActivity extends AppCompatActivity {
                     Intent intent = new Intent(patientListActivity.this,HomeActivity.class);
                     intent.putExtra("PatientId", patients.get(position));
                     startActivity(intent);
+                }else{
+                    startActivity(new Intent(patientListActivity.this,AddNewPatientActivity.class));
                 }
             }
         });
