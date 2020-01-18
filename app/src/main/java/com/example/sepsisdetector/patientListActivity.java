@@ -20,7 +20,10 @@ import java.util.ArrayList;
 
 public class patientListActivity extends AppCompatActivity {
 
-    ArrayList<String> patients ;
+
+
+    static ArrayList<String> patients = new ArrayList<>();
+    static ArrayAdapter arrayAdapter;
     ListView patientsListView ;
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -63,8 +66,8 @@ public class patientListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_list);
 
-        patientsListView = findViewById(R.id.patientsListView);
-        patients = new ArrayList<>();
+        patients.clear();
+
         patients.add("ADD A NEW PATIENT.");
         patients.add("Patient 1");
         patients.add("Patient 2");
@@ -72,9 +75,13 @@ public class patientListActivity extends AppCompatActivity {
         patients.add("Patient 4");
         patients.add("Patient 5");
         patients.add("Patient 6");
+        patients.add("Patient 7");
+        patients.add("Patient 8");
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(patientListActivity.this, android.R.layout.simple_list_item_1,patients);
-        patientsListView.setAdapter(arrayAdapter);
+        patientsListView = findViewById(R.id.patientsListView);
+
+
+        //arrayAdapter = new ArrayAdapter(patientListActivity.this, android.R.layout.simple_list_item_1,patients);
 
         patientsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -88,6 +95,9 @@ public class patientListActivity extends AppCompatActivity {
                 }
             }
         });
+
+        arrayAdapter = new ArrayAdapter(patientListActivity.this, android.R.layout.simple_list_item_1,patients);
+        patientsListView.setAdapter(arrayAdapter);
 
     }
 }

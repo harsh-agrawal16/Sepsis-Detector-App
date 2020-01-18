@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -89,7 +90,13 @@ public class HomeActivity extends AppCompatActivity {
                 Integer breathRate =  Integer.parseInt(breathRateEditText.getText().toString());
 
                 if(temp > 101 || heartbeat >90 || breathRate > 20){
+                    //Toast.makeText(HomeActivity.this, "Symptom of Sepsis Detected.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeActivity.this, "Symptom of Sepsis Detected.Triggering notification to doctor.",Toast.LENGTH_SHORT).show();
                     sendEmail();
+                    //startActivity(new Intent(HomeActivity.this, patientListActivity.class));
+                }else{
+                    Toast.makeText(HomeActivity.this, "No Abnormality detected!",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(HomeActivity.this, patientListActivity.class));
                 }
             }
         });

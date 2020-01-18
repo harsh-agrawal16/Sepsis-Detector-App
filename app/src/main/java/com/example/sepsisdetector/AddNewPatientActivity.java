@@ -60,6 +60,10 @@ public class AddNewPatientActivity extends AppCompatActivity {
             String id = myRef.push().getKey();
             Patient patient = new Patient(id,name,number);
             myRef.child(id).setValue(patient);
+            Toast.makeText(AddNewPatientActivity.this, "Patient Added Successfully",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(AddNewPatientActivity.this, patientListActivity.class));
+            //patientListActivity.patients.add(name);
+            //patientListActivity.arrayAdapter.notifyDataSetChanged();
         }
 
     }
