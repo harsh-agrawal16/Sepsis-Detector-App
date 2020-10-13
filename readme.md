@@ -1,4 +1,4 @@
-###EARLY SEPSIS DETECTOR
+EARLY SEPSIS DETECTOR
 
 This android application helps in the early prediction of a deadly disease known as SEPSIS.
 
