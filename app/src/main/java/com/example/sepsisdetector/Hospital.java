@@ -2,23 +2,39 @@ package com.example.sepsisdetector;
 
 public class Hospital {
 
-    String id;
+    String name;
+    String address;
     String email;
+    String password;
+    Patient[] patients;
 
-    public Hospital(){
 
+    public String getName() {
+        return name;
     }
 
-    public Hospital(String id, String email) {
-        this.id = id;
-        this.email = email;
-    }
-
-    public String getId() {
-        return id;
+    public String getAddress() {
+        return address;
     }
 
     public String getEmail() {
         return email;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Patient[] getPatients() {
+        return patients;
+    }
+
+    public Hospital(String name, String address, String email, String password) {
+        this.name = name;
+        this.address = address;
+        this.email = email;
+        this.password = password;
+    }
+
+
 }

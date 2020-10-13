@@ -20,7 +20,7 @@ public class AddNewPatientActivity extends AppCompatActivity {
 
     EditText nameEditText;
     EditText numberEdittext;
-    DatabaseReference myRef;
+//    DatabaseReference myRef;
     Button addButton;
 
     @Override
@@ -28,7 +28,7 @@ public class AddNewPatientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_patient);
 
-        myRef = FirebaseDatabase.getInstance().getReference("patients");
+//        myRef = FirebaseDatabase.getInstance().getReference("patients");
         addButton = findViewById(R.id.addButton);
         nameEditText = findViewById(R.id.nameEditText);
         numberEdittext = findViewById(R.id.numberEditText);
@@ -56,15 +56,17 @@ public class AddNewPatientActivity extends AppCompatActivity {
             numberEdittext.requestFocus();
         }
         else{
-            myRef = FirebaseDatabase.getInstance().getReference("Patients");
-            String id = myRef.push().getKey();
-            Patient patient = new Patient(id,name,number);
-            myRef.child(id).setValue(patient);
-            Toast.makeText(AddNewPatientActivity.this, "Patient Added Successfully",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(AddNewPatientActivity.this, patientListActivity.class));
-            //patientListActivity.patients.add(name);
-            //patientListActivity.arrayAdapter.notifyDataSetChanged();
+//            myRef = FirebaseDatabase.getInstance().getReference("Patients");
+//            String id = myRef.push().getKey();
+//            Patient patient = new Patient(id,name,number);
+//            myRef.child(id).setValue(patient);
+//            Toast.makeText(AddNewPatientActivity.this, "Patient Added Successfully",Toast.LENGTH_SHORT).show();
+//            //patientListActivity.patients.add(name);
+//            //patientListActivity.arrayAdapter.notifyDataSetChanged();
+//
+//            startActivity(new Intent(AddNewPatientActivity.this, patientListActivity.class));
         }
 
     }
 }
+

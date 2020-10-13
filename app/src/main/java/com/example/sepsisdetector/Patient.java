@@ -2,28 +2,31 @@ package com.example.sepsisdetector;
 
 public class Patient {
 
-    String patientId;
-    String patientName;
-    String number;
+    String name;
+    String address;
+    Integer number;
+    String hospitalId;
 
-    public Patient() {
-    }
-
-    public Patient(String patientId, String patientName,String number) {
-        this.patientId = patientId;
-        this.patientName = patientName;
+    public Patient(String name, String address, Integer number, String hospitalId) {
+        this.name = name;
+        this.address = address;
         this.number = number;
+        this.hospitalId = hospitalId;
     }
 
-    public String getPatientId() {
-        return patientId;
+    public String getName() {
+        return name;
     }
 
-    public String getPatientName() {
-        return patientName;
+    public String getAddress() {
+        return address;
     }
 
-    public String getNumber() {
+    public Integer getNumber() {
         return number;
+    }
+
+    public String getHospitalId() {
+        return hospitalId;
     }
 }

@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
     EditText passwordEditText;
     Button loginButton;
     TextView signUpTextView;
-    FirebaseAuth mFirebaseAuth;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
+//    FirebaseAuth mFirebaseAuth;
+//    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,48 +69,51 @@ public class MainActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
         signUpTextView = findViewById(R.id.signUpTextView);
-        mFirebaseAuth = FirebaseAuth.getInstance();
 
-        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser mFireBaseUser = mFirebaseAuth.getCurrentUser();
-                if (mFireBaseUser != null) {
-                    Toast.makeText(MainActivity.this, "You Are Logged in!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, patientListActivity.class));
-                } else {
-                    Toast.makeText(MainActivity.this, "Please Login!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
+        startActivity(new Intent(MainActivity.this, hospitalDashboardActivity.class));
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String patientId = patientidEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-                if(patientId.isEmpty()){
-                    patientidEditText.setError("Provide a valid patientId.");
-                    patientidEditText.requestFocus();
-                }else if(password.isEmpty()){
-                    passwordEditText.setError("Provide a valid password");
-                    passwordEditText.requestFocus();
-                }else if(patientId.isEmpty() && password.isEmpty()){
-                    Toast.makeText(MainActivity.this,"Fields are empty!",Toast.LENGTH_SHORT);
-                }else{
-                    mFirebaseAuth.signInWithEmailAndPassword(patientId, password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(!(task.isSuccessful())){
-                                Toast.makeText(MainActivity.this, "Login Error! Please Login again!",Toast.LENGTH_SHORT).show();
-                            }else{
-                                Toast.makeText(MainActivity.this, "Login Successful",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
-            }
-        });
+//        mFirebaseAuth = FirebaseAuth.getInstance();
+//
+//        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser mFireBaseUser = mFirebaseAuth.getCurrentUser();
+//                if (mFireBaseUser != null) {
+//                    Toast.makeText(MainActivity.this, "You Are Logged in!", Toast.LENGTH_SHORT).show();
+//                    startActivity(new Intent(MainActivity.this, hospitalDashboardActivity.class));
+//                } else {
+//                    Toast.makeText(MainActivity.this, "Please Login!", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        };
+//
+//        loginButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String patientId = patientidEditText.getText().toString();
+//                String password = passwordEditText.getText().toString();
+//                if(patientId.isEmpty()){
+//                    patientidEditText.setError("Provide a valid patientId.");
+//                    patientidEditText.requestFocus();
+//                }else if(password.isEmpty()){
+//                    passwordEditText.setError("Provide a valid password");
+//                    passwordEditText.requestFocus();
+//                }else if(patientId.isEmpty() && password.isEmpty()){
+//                    Toast.makeText(MainActivity.this,"Fields are empty!",Toast.LENGTH_SHORT);
+//                }else{
+//                    mFirebaseAuth.signInWithEmailAndPassword(patientId, password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<AuthResult> task) {
+//                            if(!(task.isSuccessful())){
+//                                Toast.makeText(MainActivity.this, "Login Error! Please Login again!",Toast.LENGTH_SHORT).show();
+//                            }else{
+//                                Toast.makeText(MainActivity.this, "Login Successful",Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    });
+//                }
+//            }
+//        });
 
         signUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+        startActivity(new Intent(MainActivity.this, hospitalDashboardActivity.class));
+//        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
 }

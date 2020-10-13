@@ -20,10 +20,8 @@ import java.util.ArrayList;
 
 public class patientListActivity extends AppCompatActivity {
 
-
-
-    static ArrayList<String> patients = new ArrayList<>();
-    static ArrayAdapter arrayAdapter;
+    static ArrayList<String> patients = new ArrayList<String>();
+    static ArrayAdapter<String> arrayAdapter;
     ListView patientsListView ;
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -66,28 +64,21 @@ public class patientListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_list);
 
-        patients.clear();
+        //patients.clear();
 
         patients.add("ADD A NEW PATIENT.");
         patients.add("Patient 1");
         patients.add("Patient 2");
-        patients.add("Patient 3");
-        patients.add("Patient 4");
-        patients.add("Patient 5");
-        patients.add("Patient 6");
-        patients.add("Patient 7");
-        patients.add("Patient 8");
 
+        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,patients);
         patientsListView = findViewById(R.id.patientsListView);
-
-
-        //arrayAdapter = new ArrayAdapter(patientListActivity.this, android.R.layout.simple_list_item_1,patients);
+        patientsListView.setAdapter(arrayAdapter);
 
         patientsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position!=0){
-                    Intent intent = new Intent(patientListActivity.this,HomeActivity.class);
+                    Intent intent = new Intent(patientListActivity.this,patientDetailsActivity.class);
                     intent.putExtra("PatientId", patients.get(position));
                     startActivity(intent);
                 }else{
@@ -96,8 +87,9 @@ public class patientListActivity extends AppCompatActivity {
             }
         });
 
-        arrayAdapter = new ArrayAdapter(patientListActivity.this, android.R.layout.simple_list_item_1,patients);
-        patientsListView.setAdapter(arrayAdapter);
+        //arrayAdapter.notifyDataSetChanged();
+        //arrayAdapter = new ArrayAdapter(patientListActivity.this, android.R.layout.simple_list_item_1,patients);
+
 
     }
 }
