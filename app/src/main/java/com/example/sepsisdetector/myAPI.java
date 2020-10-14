@@ -18,7 +18,7 @@ public interface myAPI {
     String BASE_URL = "https://pure-brushlands-56841.herokuapp.com/";
 
     @GET("patients")
-    Call<ResponseBody> getPatientsList();
+    Call<ResponseBody> getPatientsList(@Body String hospitalID);
 
     @POST("login")
     Call<ResponseBody> hospitalLogin(@Body Hospital hospital);

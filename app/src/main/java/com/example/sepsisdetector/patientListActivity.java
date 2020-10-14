@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,15 +17,28 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
+import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class patientListActivity extends AppCompatActivity {
+
+
+    private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
     static ArrayList<String> patients = new ArrayList<String>();
     static ArrayAdapter<String> arrayAdapter;
     ListView patientsListView ;
-    FirebaseAuth mFirebaseAuth;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
+    String hospitalId = getIntent().getStringExtra("hospitalId");
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -51,7 +65,6 @@ public class patientListActivity extends AppCompatActivity {
                 startActivity(k);
                 return true;
             case R.id.logout:
-                mFirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(patientListActivity.this, MainActivity.class));
             default:
                 return false;
@@ -64,11 +77,38 @@ public class patientListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_list);
 
-        //patients.clear();
-
         patients.add("ADD A NEW PATIENT.");
-        patients.add("Patient 1");
-        patients.add("Patient 2");
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(myAPI.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(httpClient.build())
+                .build();
+
+
+        myAPI api = retrofit.create(myAPI.class);
+
+        Call<ResponseBody> call = api.getPatientsList(hospitalId);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    ResponseBody jsonObject = response.body();
+                    for(int i=0;i<jsonObject.contentLength();i++){
+                        patients.add(jsonObject[i].name);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Log.d("This is what you got: ", response.body().string());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("API didnt work!", t.getMessage());
+                t.printStackTrace();
+            }
+        });
 
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,patients);
         patientsListView = findViewById(R.id.patientsListView);
@@ -87,9 +127,8 @@ public class patientListActivity extends AppCompatActivity {
             }
         });
 
-        //arrayAdapter.notifyDataSetChanged();
+        arrayAdapter.notifyDataSetChanged();
         //arrayAdapter = new ArrayAdapter(patientListActivity.this, android.R.layout.simple_list_item_1,patients);
-
-
+        
     }
 }

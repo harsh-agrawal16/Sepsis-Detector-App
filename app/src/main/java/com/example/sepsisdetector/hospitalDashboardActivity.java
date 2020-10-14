@@ -31,10 +31,13 @@ public class hospitalDashboardActivity extends AppCompatActivity {
     TextView patientsTextView;
     TextView addTextView;
 
+    String hospitalId = getIntent().getStringExtra("hospitalId");
 
 
     public void goToPatientsList(View view){
-        startActivity(new Intent(hospitalDashboardActivity.this, patientListActivity.class));
+        Intent intent = new Intent(hospitalDashboardActivity.this, patientListActivity.class);
+        intent.putExtra("hospitalId", hospitalId);
+        startActivity(intent);
     }
 
     public void addPatient(View view){
@@ -63,7 +66,7 @@ public class hospitalDashboardActivity extends AppCompatActivity {
 
         api = retrofit.create(myAPI.class);
 
-        Call<ResponseBody> call = api.getPatientsList();
+        Call<ResponseBody> call = api.getPatientsList(hospitalId);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
