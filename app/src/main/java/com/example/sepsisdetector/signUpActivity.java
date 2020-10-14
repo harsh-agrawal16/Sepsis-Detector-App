@@ -31,7 +31,7 @@ public class signUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         signUpButton = findViewById(R.id.signUpButton);
-        patientidEditText = findViewById(R.id.patientIdEditText);
+        patientidEditText = findViewById(R.id.hospitalIdEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         mFirebaseAuth = FirebaseAuth.getInstance();
         loginTextView = findViewById(R.id.loginTextView);

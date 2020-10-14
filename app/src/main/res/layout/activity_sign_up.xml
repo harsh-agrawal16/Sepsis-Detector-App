@@ -28,7 +28,7 @@
             app:srcCompat="@drawable/gehealth" />
 
         <EditText
-            android:id="@+id/patientIdEditText"
+            android:id="@+id/hospitalIdEditText"
             android:layout_width="293dp"
             android:layout_height="60dp"
             android:layout_alignBottom="@id/imageView"
@@ -42,7 +42,7 @@
             android:id="@+id/passwordEditText"
             android:layout_width="293dp"
             android:layout_height="60dp"
-            android:layout_alignBottom="@id/patientIdEditText"
+            android:layout_alignBottom="@id/hospitalIdEditText"
             android:layout_centerInParent="true"
             android:layout_marginBottom="-67dp"
             android:ems="10"
