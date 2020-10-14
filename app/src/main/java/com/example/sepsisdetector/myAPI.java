@@ -4,9 +4,13 @@ import java.util.List;
 
 
 import io.reactivex.Observable;
+import okhttp3.Callback;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface myAPI {
@@ -15,5 +19,9 @@ public interface myAPI {
 
     @GET("patients")
     Call<ResponseBody> getPatientsList();
+
+
+    @POST("login")
+    Call<ResponseBody> hospitalLogin(@Body Hospital hospital);
 
 }

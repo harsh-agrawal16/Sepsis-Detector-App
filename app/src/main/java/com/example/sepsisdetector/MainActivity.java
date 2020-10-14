@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,16 +21,26 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.protobuf.Api;
+
+import java.io.IOException;
+
+import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
-    EditText patientidEditText;
+    EditText hospitalIdEditText;
     EditText passwordEditText;
     Button loginButton;
     TextView signUpTextView;
-//    FirebaseAuth mFirebaseAuth;
-//    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,60 +71,71 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        patientidEditText = findViewById(R.id.patientIdEditText);
+        hospitalIdEditText = findViewById(R.id.hospitalIdEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
         signUpTextView = findViewById(R.id.signUpTextView);
 
-        startActivity(new Intent(MainActivity.this, hospitalDashboardActivity.class));
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(myAPI.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(httpClient.build())
+                .build();
 
-//        mFirebaseAuth = FirebaseAuth.getInstance();
-//
-//        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                FirebaseUser mFireBaseUser = mFirebaseAuth.getCurrentUser();
-//                if (mFireBaseUser != null) {
-//                    Toast.makeText(MainActivity.this, "You Are Logged in!", Toast.LENGTH_SHORT).show();
-//                    startActivity(new Intent(MainActivity.this, hospitalDashboardActivity.class));
-//                } else {
-//                    Toast.makeText(MainActivity.this, "Please Login!", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        };
-//
-//        loginButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String patientId = patientidEditText.getText().toString();
-//                String password = passwordEditText.getText().toString();
-//                if(patientId.isEmpty()){
-//                    patientidEditText.setError("Provide a valid patientId.");
-//                    patientidEditText.requestFocus();
-//                }else if(password.isEmpty()){
-//                    passwordEditText.setError("Provide a valid password");
-//                    passwordEditText.requestFocus();
-//                }else if(patientId.isEmpty() && password.isEmpty()){
-//                    Toast.makeText(MainActivity.this,"Fields are empty!",Toast.LENGTH_SHORT);
-//                }else{
-//                    mFirebaseAuth.signInWithEmailAndPassword(patientId, password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<AuthResult> task) {
-//                            if(!(task.isSuccessful())){
-//                                Toast.makeText(MainActivity.this, "Login Error! Please Login again!",Toast.LENGTH_SHORT).show();
-//                            }else{
-//                                Toast.makeText(MainActivity.this, "Login Successful",Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    });
-//                }
-//            }
-//        });
+        final myAPI api = retrofit.create(myAPI.class);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String hospitalId = hospitalIdEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+
+                Hospital newHospital = new Hospital(hospitalId , password);
+
+                if(hospitalId.isEmpty()){
+                    hospitalIdEditText.setError("Provide a valid patientId.");
+                    hospitalIdEditText.requestFocus();
+                }else if(password.isEmpty()){
+                    passwordEditText.setError("Provide a valid password");
+                    passwordEditText.requestFocus();
+                }else if(hospitalId.isEmpty() && password.isEmpty()){
+                    Toast.makeText(MainActivity.this,"Fields are empty!",Toast.LENGTH_SHORT);
+                }else{
+                    Call<ResponseBody> call = api.hospitalLogin(newHospital);
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            String message = null;
+                            try {
+                                Log.i("This is what you got: ", response.body().string());
+                                message = response.body().string();
+                                if(message == "Sorry"){
+                                    Toast.makeText(MainActivity.this, "Wrong Credentials", Toast.LENGTH_SHORT);
+                                }
+                                else{
+                                    Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT);
+                                    startActivity(new Intent(MainActivity.this, hospitalDashboardActivity.class));
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
+
+                }
+            }
+        });
 
         signUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        startActivity(new Intent(MainActivity.this, hospitalDashboardActivity.class));
-//        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+//        startActivity(new Intent(MainActivity.this, hospitalDashboardActivity.class));
     }
 }

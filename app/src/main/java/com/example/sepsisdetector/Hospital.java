@@ -2,11 +2,11 @@ package com.example.sepsisdetector;
 
 public class Hospital {
 
-    String name;
-    String address;
-    String email;
-    String password;
-    Patient[] patients;
+    private String name;
+    private String address;
+    private String email;
+    private String password;
+    private Patient[] patients;
 
 
     public String getName() {
@@ -36,5 +36,8 @@ public class Hospital {
         this.password = password;
     }
 
-
+    public Hospital(String email, String password){
+        this.email = email;
+        this.password = password;
+    }
 }
