@@ -20,8 +20,10 @@ public interface myAPI {
     @GET("patients")
     Call<ResponseBody> getPatientsList();
 
-
     @POST("login")
     Call<ResponseBody> hospitalLogin(@Body Hospital hospital);
+
+    @POST("signUp")
+    Call<ResponseBody> hospitalSignUp(@Body Hospital hospital);
 
 }

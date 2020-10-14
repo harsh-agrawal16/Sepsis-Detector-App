@@ -28,23 +28,45 @@
             app:srcCompat="@drawable/gehealth" />
 
         <EditText
+            android:id="@+id/hospitalNameEditText"
+            android:layout_width="290dp"
+            android:layout_height="56dp"
+            android:layout_alignBottom="@id/imageView"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="-78dp"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName" />
+
+        <EditText
             android:id="@+id/hospitalIdEditText"
             android:layout_width="293dp"
             android:layout_height="60dp"
-            android:layout_alignBottom="@id/imageView"
+            android:layout_alignBottom="@id/hospitalNameEditText"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="-67dp"
+            android:layout_marginBottom="-77dp"
             android:ems="10"
             android:hint="Email"
             android:inputType="textEmailAddress" />
 
         <EditText
+            android:id="@+id/hospitalAddressEditText"
+            android:layout_width="293dp"
+            android:layout_height="60dp"
+            android:layout_alignBottom="@id/hospitalNameEditText"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="-151dp"
+            android:ems="10"
+            android:hint="Address"
+            android:inputType="text" />
+
+        <EditText
             android:id="@+id/passwordEditText"
             android:layout_width="293dp"
             android:layout_height="60dp"
-            android:layout_alignBottom="@id/hospitalIdEditText"
+            android:layout_alignBottom="@id/hospitalAddressEditText"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="-67dp"
+            android:layout_marginBottom="-72dp"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword" />
@@ -55,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/passwordEditText"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="-67dp"
+            android:layout_marginBottom="-93dp"
             android:backgroundTint="#03A9F4"
             android:text="Sign Up" />
 
@@ -65,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/signUpButton"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="-28dp"
+            android:layout_marginBottom="-52dp"
             android:text="Already Have An Account. Sign in?"
             android:textSize="18sp" />
 
